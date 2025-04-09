@@ -1,0 +1,65 @@
+________________________dia-1__________________
+Filtro de wireshark para ver el trafico
+
+ip.addr == 10.150.45.201 or ip.addr == 10.150.45.202
+
+________________________dia-2__________________
+hacer trafico con 
+
+ssh
+telnet
+ping
+averiguar que mas para buscar vulnerabilidades 
+
+entrega lunes 15 julio 
+
+________________________dia-3__________________
+
+
+1. Escaneo de Puertos [Listo]
+   - Herramienta: Nmap
+   - Objetivo: Identificar puertos abiertos y servicios que se están ejecutando.
+   - Comando: `nmap -sV -p- 10.150.45.201 10.150.45.202`
+
+2. Tráfico HTTP/HTTPS [Listo]
+   - Herramientas: `curl`, `wget`
+   - Objetivo: Probar la disponibilidad y configuración de servidores web.
+   - Comandos:
+     - curl http://10.150.45.201
+     - curl https://10.150.45.202
+
+3. Pruebas de Carga [Paso de hacerlo]
+   - Herramienta: Apache Bench (ab)
+   - Objetivo: Evaluar cómo los servidores manejan el estrés y el alto tráfico.
+   - Comando: `ab -n 1000 -c 100 http://10.150.45.201/`
+
+4. Tráfico DNS [Listo]
+   - Herramientas: `dig`, `nslookup`
+   - Objetivo: Verificar la configuración y respuesta de los servidores DNS.
+   - nslookup example.com 10.150.45.201
+   - nslookup example.com 10.150.45.202
+
+
+5. Tráfico SSH [Listo]
+   - Objetivo: Probar la seguridad y configuración del servicio SSH.
+   - Comando: Intenta iniciar una sesión SSH para observar la negociación de cifrado y autenticación.
+   - `ssh usuario@10.150.45.201`
+   - `ssh usuario@10.150.45.202`
+
+6. Tráfico Telnet [Listo]
+   - Objetivo: Verificar si Telnet está habilitado y observar la falta de cifrado.
+   - Comando: Intenta conectar a través de Telnet para capturar credenciales no cifradas.
+   - `telnet 10.150.45.201`
+   - `telnet 10.150.45.202`
+
+7. Ping (ICMP Echo Request) [Listo]
+   - Objetivo: Verificar la conectividad y medir la respuesta del tiempo.
+   - Comando: `ping 10.150.45.201` y `ping 10.150.45.202`
+
+8. Simulación de Ataques [Mucho para el ramo]
+   - Herramienta: Metasploit
+   - Objetivo: Identificar y explotar vulnerabilidades conocidas.
+   - Uso: Utiliza módulos específicos en Metasploit ajustados a los servicios que descubras.
+
+
+

@@ -1,0 +1,82 @@
+ Análisis de los Datos Recogidos
+
+1. Ping (ICMP)
+   - Observación: La comunicación ICMP se ha realizado con éxito entre la dirección IP 10.145.21.133 y 
+   los servidores 10.150.45.201 y 10.150.45.202.
+   - Posible Problema de Seguridad: 
+   Aunque el ICMP es útil para la administración de red, puede ser explotado en ataques de tipo "Ping Flood". 
+   Se recomienda limitar el tráfico ICMP a nivel del firewall.
+
+2. Telnet
+   - Observación: Se ha detectado tráfico Telnet en los servidores 10.150.45.201 y 10.150.45.202.
+   - Posible Problema de Seguridad: 
+   Telnet transmite datos, incluidas las credenciales, en texto plano, lo que es un riesgo significativo de seguridad. 
+   Se recomienda deshabilitar Telnet y usar SSH en su lugar.
+
+3. SSH
+   - Observación: Se ha detectado tráfico SSH en ambos servidores.
+   - Posible Problema de Seguridad: 
+   El uso de SSH es una buena práctica. Asegúrate de que solo se permitan conexiones SSH desde direcciones IP de confianza 
+   y que se utilicen autenticaciones basadas en claves en lugar de contraseñas.
+
+4. Curl (HTTP)
+   - Observación: Se ha detectado tráfico HTTP desde y hacia los servidores.
+   - Posible Problema de Seguridad: 
+   HTTP no cifra los datos en tránsito, lo que puede exponer información sensible. 
+   Se recomienda migrar a HTTPS para proteger la integridad y confidencialidad de los datos.
+
+5. nmap-sV
+   - Observación: Parece que se han realizado escaneos de puertos con `nmap`.
+   - Posible Problema de Seguridad: 
+   Si estos escaneos no fueron autorizados, podrían ser indicativos de un intento de reconocimiento por parte de un atacante. 
+   Monitorea y bloquea tales actividades.
+
+6. nslookup (DNS)
+   - Observación: Se ha realizado una consulta DNS.
+   - Posible Problema de Seguridad: 
+   Las consultas DNS en sí no son problemáticas, pero asegúrate de que el servidor DNS no esté configurado 
+   para permitir consultas recursivas desde cualquier IP externa, lo cual puede ser explotado en ataques de amplificación DNS.
+
+ Recomendaciones
+
+1. Limitar Tráfico ICMP: Implementa reglas en el firewall para limitar el tráfico ICMP a solo lo necesario para la administración de red.
+2. Deshabilitar Telnet: Telnet debe ser deshabilitado y reemplazado por SSH en todos los servidores.
+3. Fortalecer Configuración de SSH: Asegúrate de que SSH esté configurado para aceptar solo autenticaciones basadas en claves y que las conexiones solo se permitan desde IPs de confianza.
+4. Migrar HTTP a HTTPS: Actualiza todos los servicios HTTP a HTTPS para proteger los datos en tránsito.
+5. Monitoreo y Alertas: Configura sistemas de monitoreo y alertas para detectar y responder rápidamente a actividades sospechosas, como escaneos de puertos no autorizados.
+6. Seguridad DNS: Configura el servidor DNS para restringir las consultas recursivas y protegerlo contra ataques de amplificación.
+
+
+
+
+Intento de informe de Auditoría de Seguridad
+
+ 1. Introducción
+Este informe detalla los servicios activos y los posibles problemas de seguridad identificados en los servidores 10.150.45.201 y 10.150.45.202 mediante una escucha pasiva utilizando Wireshark.
+
+ 2. Metodología
+- Se utilizó Wireshark para capturar y analizar el tráfico de red.
+- Los filtros de captura se configuraron para centrarse en las IPs 10.150.45.201 y 10.150.45.202.
+- Se analizaron los puertos y protocolos utilizados para identificar servicios activos y potenciales vulnerabilidades.
+
+ 3. Problemas de Seguridad Identificados
+- Ping (ICMP): Posible explotación en ataques de tipo "Ping Flood".
+- Telnet: Transmisión de datos en texto plano, riesgo significativo de seguridad.
+- SSH: Uso de SSH es adecuado, pero asegurar configuraciones.
+- HTTP: Transmisión de datos en texto plano, riesgo de exposición de información sensible.
+- nmap-sV: Indicios de escaneos de puertos no autorizados.
+- DNS: Asegurar configuración para prevenir consultas recursivas no autorizadas.
+
+ 4. Recomendaciones
+- Limitar tráfico ICMP a nivel de firewall.
+- Deshabilitar Telnet y usar SSH.
+- Configurar SSH para aceptar solo autenticaciones basadas en claves y permitir conexiones solo desde IPs de confianza.
+- Migrar servicios HTTP a HTTPS.
+- Implementar monitoreo y alertas para detectar escaneos de puertos no autorizados.
+- Configurar servidor DNS para restringir consultas recursivas.
+
+ 5. Anexos
+- [Enlace a archivo .pcap con capturas relevantes](enlace_al_archivo.pcap)
+
+ 6. Conclusión
+La auditoría reveló varios problemas de seguridad significativos que deben ser abordados para mejorar la seguridad de la infraestructura TIC.
